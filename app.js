@@ -1,7 +1,7 @@
 // register service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/veenaw.github.io/sw.js', scope : {'/veenaw.github.io/images'});
+        navigator.serviceWorker.register('/veenaw.github.io/sw.js', { scope: '/veenaw.github.io/' });
         
         //navigator.serviceWorker.ready always resolve
         navigator.serviceWorker.ready.then(function (registration) {
