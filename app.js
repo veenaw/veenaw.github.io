@@ -37,8 +37,6 @@ function imgLoad(imgurl) {
   // return a promise for an image loading
 // download as Blob object
   return new Promise(function(resolve, reject) {
-    let response = fetch(url);
-    let blob = response.blob(); 
     fetch(imgurl).then((response) => {
       if(response.status == 200)
       {
