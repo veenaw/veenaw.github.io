@@ -19,6 +19,12 @@ if ('serviceWorker' in navigator) {
 
 
 // function for loading each image via XHR
+function addImage()
+{
+  this.maximages = this.maximages + 1;
+  loadAllImages();
+
+};
 
 function imgLoad(imgurl) {
   // return a promise for an image loading
@@ -33,36 +39,16 @@ function imgLoad(imgurl) {
         outside = URL.createObjectURL(images)
         console.log(outside);
       });
-
-/*
-
-    request.onload = function() {
-      if (request.status == 200) {
-        var response = request.response;
-        resolve(response);
-      } else {
-        reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
-      }
-    };
-
-    request.onerror = function() {
-      reject(Error('There was a network error.'));
-    };
-
-    // Send the request
-    request.send();*/
   });
 }
 
-window.onload = function() {
-
+function loadAllImages()
+{
   var imgSection = document.querySelector('section');
   var path = 'images/'
   var url  = 'images/image.jpeg?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1'
-  var maximages = 5;
-
-  // load each set of image, alt text, name and caption
-  for(var i = 0; i< maximages; i++) {
+    // load each set of image, alt text, name and caption
+  for(var i = 0; i< this.maximages; i++) {
     imgLoad(url).then(function(response) {
 
       var myImage = document.createElement('img');
@@ -79,5 +65,11 @@ window.onload = function() {
       console.log(Error);
     });
   }
+}
+
+window.onload = function() {
+   this.maximages = 5;
+  loadAllImages()
+
 };
 
