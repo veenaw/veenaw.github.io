@@ -15,6 +15,7 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('fetch', function(event) {   
 
+
   var translatorJson = 
   {
     'interaction': 'event',
@@ -25,9 +26,9 @@ self.addEventListener('fetch', function(event) {
     'x3': 'utm_campaign',
     'landing_url': 'campaign_url'
   }
+  traslatedparams = '';
 
   if (/\.jpeg$/.test(event.request.url)) { 
-    traslatedparams = '';
     for (obj in translatorJson)
     {
       value = '';
@@ -43,12 +44,12 @@ self.addEventListener('fetch', function(event) {
 
 
     }
+  }
     event.respondWith(
     new Response('<p>This is a response that comes from your service worker! '+ event.request.url + traslatedparams + '</p>', {
        headers: { 'Content-Type': 'text/html' }
       })
     );
-  }
 });
 
 /*
