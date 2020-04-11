@@ -17,19 +17,36 @@ self.addEventListener('fetch', function(event) {
 
   var translatorJson = 
   {
-    “interaction”: “event”,
-    “client”: “customer”,
-    “os_name”: “operating_system_name”, “x1”: “utm_source”,
-    “x2”: “utm_medium”,
-    “x3”: “utm_campaign”,
-    “landing_url”: “campaign_url”
+    'interaction': 'event',
+    'client': 'customer',
+    'os_name': 'operating_system_name', 
+    'x1': 'utm_source',
+    'x2': 'utm_medium',
+    'x3': 'utm_campaign',
+    'landing_url': 'campaign_url'
   }
-          
+
   if (/\.jpeg$/.test(event.request.url)) { 
+    traslatedparams = '';
+    for (obj in translatorJson)
+    {
+      value = '';
+      if (event.request.url.searchParams.get(obj))
+      {
+        value = event.request.url.searchParams.get(obj);
+
+      }
+      if (value != '')
+      {
+        traslatedparams += obj + '='+value
+      }
+
+
+    }
     event.respondWith(
-    new Response('<p>This is a response that comes from your service worker!</p>', {
+    new Response('<p>This is a response that comes from your service worker! '+ event.request.url + traslatedparams + '</p>', {
        headers: { 'Content-Type': 'text/html' }
-      });
+      })
     );
   }
 });
