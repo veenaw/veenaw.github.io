@@ -41,7 +41,7 @@ function imgLoad(imgurl) {
       if(response.status == 200)
       {
         var arrayResponse = [];
-        arrayResponse[0] = request.response;
+        arrayResponse[0] = response.blob();
         arrayResponse[1] = imgurl;
         resolve(arrayResponse);
       } else {
