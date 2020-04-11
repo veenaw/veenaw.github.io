@@ -5,7 +5,8 @@ self.addEventListener('install', function(event) {
         '/veenaw.github.io/',
         '/veenaw.github.io/index.html',
         '/veenaw.github.io/style.css',
-        '/veenaw.github.io/app.js'
+        '/veenaw.github.io/app.js',
+        '/veenaw.github.io/images/image.jpeg'
       ]);
     })
   );
@@ -25,6 +26,7 @@ self.addEventListener('fetch', function(event) {
         // and serve second one
         //const url = new URL(event.request.clone().url);
         //var paramValue = url.searchParams.get("filename");
+
         console.log(event.request);
         let responseClone = response.clone();
         
@@ -33,7 +35,7 @@ self.addEventListener('fetch', function(event) {
         });
         return response;
       }).catch(function () {
-        return caches.match('/sw-test/gallery/myLittleVader.jpg');
+        return caches.match('/veenaw.github.io/images/image.jpeg');
       });
     }
   }));

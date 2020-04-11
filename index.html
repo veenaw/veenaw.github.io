@@ -21,7 +21,7 @@
   		function sendRequest()
   		{
 			var xhr = new XMLHttpRequest();
-			xhr.open('GET', "http://www.xyz.com/pixel.gif?interaction=UserClick&client=ad_media&os_name=macos&x1=go ogle&x2=email&x3=pdfconvert&landing_url=abcd1", true);
+			xhr.open('GET', "/getimage.gif?interaction=UserClick&client=ad_media&os_name=macos&x1=go ogle&x2=email&x3=pdfconvert&landing_url=abcd1", true);
 			xhr.send();
   		}
 
@@ -29,7 +29,7 @@
 
     <form>
     	<h1> HELLO World !!!</h1>
-    	<button onclick="sendRequest()"> </button>
+    	<button onclick="sendRequest()"> click me to send get request</button>
       </form>
   </body>
 </html>
