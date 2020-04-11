@@ -45,11 +45,11 @@ function imgLoad(imgurl) {
   });
 }
 
-var imgSection = document.querySelector('section');
-var path = 'images/'
-var url  = 'images/image.jpeg?interaction=UserClick&client=ad_media&os_name=macos&x1=go ogle&x2=email&x3=pdfconvert&landing_url=abcd1'
-
 window.onload = function() {
+    
+  var imgSection = document.querySelector('section');
+  var path = 'images/'
+  var url  = 'images/image.jpeg?interaction=UserClick&client=ad_media&os_name=macos&x1=go ogle&x2=email&x3=pdfconvert&landing_url=abcd1'
 
   // load each set of image, alt text, name and caption
   for(var i = 0; i<=4; i++) {
