@@ -10,11 +10,16 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+var maximages = 5;
+var path = 'images/'
+var url  = 'images/image.jpeg?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1'
+  
+
 
 // function for loading each image via XHR
 function addImage()
 {
-  this.maximages = this.maximages + 1;
+  maximages = maximages + 1;
   loadAllImages();
 
 };
@@ -38,10 +43,8 @@ function imgLoad(imgurl) {
 function loadAllImages()
 {
   var imgSection = document.querySelector('section');
-  var path = 'images/'
-  var url  = 'images/image.jpeg?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1'
     // load each set of image, alt text, name and caption
-  for(var i = 0; i< this.maximages; i++) {
+  for(var i = 0; i< maximages; i++) {
     imgLoad(url).then(function(response) {
 
       var myImage = document.createElement('img');
@@ -61,7 +64,6 @@ function loadAllImages()
 }
 
 window.onload = function() {
-   this.maximages = 5;
   loadAllImages()
 
 };
