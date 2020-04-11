@@ -6,7 +6,6 @@ self.addEventListener('install', function(event) {
         '/veenaw.github.io/index.html',
         '/veenaw.github.io/style.css',
         '/veenaw.github.io/app.js',
-        '/veenaw.github.io/images/',
         '/veenaw.github.io/images/image.jpeg'
       ]);
     })
@@ -14,12 +13,9 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-          //console.log(event);
   event.respondWith(caches.match(event.request).then(function(response) {
     // caches.match() always resolves
     // but in case of success response will have value
-            //console.log(event.request);
-
     if (response !== undefined) {
       return response;
     } else {
@@ -31,7 +27,6 @@ self.addEventListener('fetch', function(event) {
         //const url = new URL(event.request.clone().url);
         //var paramValue = url.searchParams.get("filename");
 
-        console.log(event.request);
         let responseClone = response.clone();
         
         caches.open('v1').then(function (cache) {
