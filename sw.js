@@ -13,9 +13,12 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+          console.log(event);
   event.respondWith(caches.match(event.request).then(function(response) {
     // caches.match() always resolves
     // but in case of success response will have value
+            console.log(event.request);
+
     if (response !== undefined) {
       return response;
     } else {
