@@ -20,10 +20,20 @@
 
   		function sendRequest()
   		{
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', "/getimage.gif?interaction=UserClick&client=ad_media&os_name=macos&x1=go ogle&x2=email&x3=pdfconvert&landing_url=abcd1", true);
-			xhr.send();
+			// var xhr = new XMLHttpRequest();
+			//xhr.open('GET', "/getimage.gif?interaction=UserClick&client=ad_media&os_name=macos&x1=go ogle&x2=email&x3=pdfconvert&landing_url=abcd1", true);
+			//xhr.send();
+
+			fetch('http://example.com/movies.json')
+			.then((response) => {
+			return response.json();
+			})
+			.then((data) => {
+			console.log(data);
+			});
   		}
+
+
 
   	</script>
 
