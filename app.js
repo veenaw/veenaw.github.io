@@ -32,26 +32,29 @@ function addImage()
 
 };
 
-/*
 
 function imgLoad(imgurl) {
   // return a promise for an image loading
+// download as Blob object
   return new Promise(function(resolve, reject) {
-    var request = new XMLHttpRequest();
-    request.open('GET', imgurl);
-    request.responseType = 'blob';
-    var outside;
+    let response = fetch(url);
+    let blob = response.blob(); 
     fetch(imgurl).then((response) => {
-      return response.blob();
-      }).then((images) => {
-        outside = URL.createObjectURL(images)
-        console.log(outside);
-      });
+      if(response.status == 200)
+      {
+        var arrayResponse = [];
+        arrayResponse[0] = request.response;
+        arrayResponse[1] = imgurl;
+        resolve(arrayResponse);
+      } else {
+        reject(Error('Image didn\'t load successfully; error code:' + response.statusText));
+      }
+      })
   });
-}*/
+}
 
 // function for loading each image via XHR
-
+/*
 function imgLoad(imgurl) {
   // return a promise for an image loading
   return new Promise(function(resolve, reject) {
@@ -77,12 +80,9 @@ function imgLoad(imgurl) {
     };
 
     // Send the request
-    //request.send();
-     fetch(request).then((response) => {
-      return response.blob();
-      });
+    request.send();
   });
-}
+}*/
 
 function loadAllImages(isfirstload)
 {
