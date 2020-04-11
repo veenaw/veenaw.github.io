@@ -23,9 +23,16 @@ if ('serviceWorker' in navigator) {
 function imgLoad(imgurl) {
   // return a promise for an image loading
   return new Promise(function(resolve, reject) {
-    var request = new XMLHttpRequest();
-    request.open('GET', imgurl);
-    request.responseType = 'blob';
+    //var request = new XMLHttpRequest();
+    //request.open('GET', imgurl);
+    //request.responseType = 'blob';
+    var outside;
+    fetch(imgurl).then((response) => {
+      return response.blob();
+      }).then((images) => {
+        outside = URL.createObjectURL(images)
+        console.log(outside);
+      });
 
     request.onload = function() {
       if (request.status == 200) {
@@ -50,9 +57,10 @@ window.onload = function() {
   var imgSection = document.querySelector('section');
   var path = 'images/'
   var url  = 'images/image.jpeg?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1'
+  var maximages = 5;
 
   // load each set of image, alt text, name and caption
-  for(var i = 0; i<=4; i++) {
+  for(var i = 0; i< maximages; i++) {
     imgLoad(url).then(function(response) {
 
       var myImage = document.createElement('img');
