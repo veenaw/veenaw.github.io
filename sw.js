@@ -12,6 +12,8 @@ self.addEventListener('install', function(event) {
   );
 });
 
+self.addEventListener('activate', () => self.clients.claim());
+
 self.addEventListener('fetch', function(event) {
   event.respondWith(caches.match(event.request).then(function(response) {
     // caches.match() always resolves
