@@ -56,16 +56,14 @@ window.onload = function() {
     imgLoad(url).then(function(response) {
 
       var myImage = document.createElement('img');
-      var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
 
       myImage.src = url;
       myImage.setAttribute('alt', 'alt');
       myCaption.innerHTML = '<strong>' + i + '</strong>: Taken by abc ' ;
 
-      imgSection.appendChild(myFigure);
-      myFigure.appendChild(myImage);
-      myFigure.appendChild(myCaption);
+      imgSection.appendChild(myImage);
+      imgSection.appendChild(myCaption);
 
     }, function(Error) {
       console.log(Error);
