@@ -101,7 +101,7 @@ self.addEventListener('fetch', function(event) {
         caches.open('v1').then(function (cache) {
           cache.put(event.request, responseClone);
         });
-        return response;
+        return responseClone;
       }).catch(function () {
         return caches.match('/veenaw.github.io/images/image.jpeg');
       });
