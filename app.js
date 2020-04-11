@@ -33,6 +33,7 @@ function addImage()
 };
 
 /*
+
 function imgLoad(imgurl) {
   // return a promise for an image loading
   return new Promise(function(resolve, reject) {
@@ -58,6 +59,8 @@ function imgLoad(imgurl) {
     request.open('GET', imgurl);
     request.responseType = 'blob';
 
+
+
     request.onload = function() {
       if (request.status == 200) {
         var arrayResponse = [];
@@ -74,7 +77,10 @@ function imgLoad(imgurl) {
     };
 
     // Send the request
-    request.send();
+    //request.send();
+     fetch(request).then((response) => {
+      return response.blob();
+      });
   });
 }
 
