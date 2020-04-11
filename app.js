@@ -34,6 +34,8 @@ function imgLoad(imgurl) {
         console.log(outside);
       });
 
+/*
+
     request.onload = function() {
       if (request.status == 200) {
         var response = request.response;
@@ -48,7 +50,7 @@ function imgLoad(imgurl) {
     };
 
     // Send the request
-    request.send();
+    request.send();*/
   });
 }
 
