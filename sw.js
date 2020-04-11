@@ -23,6 +23,9 @@ self.addEventListener('fetch', function(event) {
         // response may be used only once
         // we need to save clone to put one copy in cache
         // and serve second one
+        //const url = new URL(event.request.clone().url);
+        //var paramValue = url.searchParams.get("filename");
+        console.log(event.request);
         let responseClone = response.clone();
         
         caches.open('v1').then(function (cache) {
