@@ -24,6 +24,7 @@ function addImage()
 
 };
 
+/*
 function imgLoad(imgurl) {
   // return a promise for an image loading
   return new Promise(function(resolve, reject) {
@@ -38,6 +39,35 @@ function imgLoad(imgurl) {
         console.log(outside);
       });
   });
+}*/
+
+// function for loading each image via XHR
+
+function imgLoad(imgurl) {
+  // return a promise for an image loading
+  return new Promise(function(resolve, reject) {
+    var request = new XMLHttpRequest();
+    request.open('GET', imgurl);
+    request.responseType = 'blob';
+
+    request.onload = function() {
+      if (request.status == 200) {
+        var arrayResponse = [];
+        arrayResponse[0] = request.response;
+        arrayResponse[1] = imgurl;
+        resolve(arrayResponse);
+      } else {
+        reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
+      }
+    };
+
+    request.onerror = function() {
+      reject(Error('There was a network error.'));
+    };
+
+    // Send the request
+    request.send();
+  });
 }
 
 function loadAllImages()
@@ -45,14 +75,18 @@ function loadAllImages()
   var imgSection = document.querySelector('section');
     // load each set of image, alt text, name and caption
   for(var i = 0; i< maximages; i++) {
-    imgLoad(url).then(function(response) {
+    imgLoad(url).then(function(arrayResponse) {
 
       var myImage = document.createElement('img');
       var myCaption = document.createElement('caption');
+      var imageURL = window.URL.createObjectURL(arrayResponse[0]);
 
-      myImage.src = url;
+
+      myImage.src = imageURL;
       myImage.setAttribute('alt', 'alt');
-      myCaption.innerHTML = '<strong>' + i + '</strong>: Taken by abc ' ;
+      //myCaption.innerHTML = '<strong>' + i + '</strong>: Taken by abc ' ;
+      myCaption.innerHTML = '<strong>' + arrayResponse[1] + '</strong>: Taken by abc';
+
 
       imgSection.appendChild(myImage);
       imgSection.appendChild(myCaption);
