@@ -81,7 +81,7 @@ function loadAllImages(isfirstload)
   {
     toadd = maximages -prevmaximamges;
   }
-  
+
   for(var i = 0; i< toadd; i++) {
     imgLoad(url).then(function(arrayResponse) {
 
@@ -106,7 +106,7 @@ function loadAllImages(isfirstload)
 }
 
 window.onload = function() {
-  loadAllImages()
+  loadAllImages(true);
 
 };
 
