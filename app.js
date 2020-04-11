@@ -17,3 +17,59 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+
+// function for loading each image via XHR
+
+function imgLoad(imgurl) {
+  // return a promise for an image loading
+  return new Promise(function(resolve, reject) {
+    var request = new XMLHttpRequest();
+    request.open('GET', imgurl);
+    request.responseType = 'blob';
+
+    request.onload = function() {
+      if (request.status == 200) {
+        var response = request.response;
+        resolve(response);
+      } else {
+        reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
+      }
+    };
+
+    request.onerror = function() {
+      reject(Error('There was a network error.'));
+    };
+
+    // Send the request
+    request.send();
+  });
+}
+
+var imgSection = document.querySelector('section');
+var path = 'images/'
+var url  = 'images/image.jpeg'
+
+window.onload = function() {
+
+  // load each set of image, alt text, name and caption
+  for(var i = 0; i<=4; i++) {
+    imgLoad(url).then(function(response) {
+
+      var myImage = document.createElement('img');
+      var myFigure = document.createElement('figure');
+      var myCaption = document.createElement('caption');
+
+      myImage.src = url;
+      myImage.setAttribute('alt', 'alt');
+      myCaption.innerHTML = '<strong>' + i + '</strong>: Taken by abc ' ;
+
+      imgSection.appendChild(myFigure);
+      myFigure.appendChild(myImage);
+      myFigure.appendChild(myCaption);
+
+    }, function(Error) {
+      console.log(Error);
+    });
+  }
+};
+
