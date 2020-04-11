@@ -1,7 +1,7 @@
 // register service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/veenaw.github.io/sw.js');
+        navigator.serviceWorker.register('/veenaw.github.io/sw.js', scope : {'/veenaw.github.io/images'});
         
         //navigator.serviceWorker.ready always resolve
         navigator.serviceWorker.ready.then(function (registration) {
@@ -27,9 +27,9 @@ function addImage()
 function imgLoad(imgurl) {
   // return a promise for an image loading
   return new Promise(function(resolve, reject) {
-    //var request = new XMLHttpRequest();
-    //request.open('GET', imgurl);
-    //request.responseType = 'blob';
+    var request = new XMLHttpRequest();
+    request.open('GET', imgurl);
+    request.responseType = 'blob';
     var outside;
     fetch(imgurl).then((response) => {
       return response.blob();
