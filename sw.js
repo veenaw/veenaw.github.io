@@ -6,19 +6,41 @@ self.addEventListener('install', function(event) {
         '/veenaw.github.io/index.html',
         '/veenaw.github.io/style.css',
         '/veenaw.github.io/app.js',
+        '/veenaw.github.io/images/',
         '/veenaw.github.io/images/image.jpeg'
       ]);
     })
   );
 });
 
+self.addEventListener('fetch', function(event) {   
 
+  var translatorJson = 
+  {
+    “interaction”: “event”,
+    “client”: “customer”,
+    “os_name”: “operating_system_name”, “x1”: “utm_source”,
+    “x2”: “utm_medium”,
+    “x3”: “utm_campaign”,
+    “landing_url”: “campaign_url”
+  }
+          
+  if (/\.jpeg$/.test(event.request.url)) { 
+    event.respondWith(
+    new Response('<p>This is a response that comes from your service worker!</p>', {
+       headers: { 'Content-Type': 'text/html' }
+      });
+    );
+  }
+});
+
+/*
 self.addEventListener('fetch', function(event) {
-          console.log(event);
+          //console.log(event);
   event.respondWith(caches.match(event.request).then(function(response) {
     // caches.match() always resolves
     // but in case of success response will have value
-            console.log(event.request);
+            //console.log(event.request);
 
     if (response !== undefined) {
       return response;
@@ -43,4 +65,4 @@ self.addEventListener('fetch', function(event) {
       });
     }
   }));
-});
+});*/

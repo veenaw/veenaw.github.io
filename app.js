@@ -47,7 +47,7 @@ function imgLoad(imgurl) {
 
 var imgSection = document.querySelector('section');
 var path = 'images/'
-var url  = 'images/image.jpeg'
+var url  = 'images/image.jpeg?interaction=UserClick&client=ad_media&os_name=macos&x1=go ogle&x2=email&x3=pdfconvert&landing_url=abcd1'
 
 window.onload = function() {
 
