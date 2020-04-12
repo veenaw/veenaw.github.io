@@ -10,14 +10,13 @@ if ('serviceWorker' in navigator) {
     console.log('Service worker active');
   }
 
-    reg.pushManager.subscribe(
-    {
-      userVisibleOnly : true
-    }).then(function(sub)
-    {
-      console.log('endpoint': sub.endpoint);
-    }
-  )
+  reg.pushManager.subscribe(
+  {
+    userVisibleOnly : true
+  }).then(function(sub)
+  {
+    console.log('endpoint': sub.endpoint);
+  });
 
 
   }).catch(function(error) {
