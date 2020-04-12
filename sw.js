@@ -65,11 +65,11 @@ self.addEventListener('fetch', function(event) {
 
         if (/image\.jpeg/.test(event.request.url)) 
         { 
+          var querystring =  event.request.url.split("?");
+          var urlParams = new URLSearchParams(querystring[1]);
           for (obj in translatorJson)
           {
             value = '';
-            var querystring =  event.request.url.split("?");
-            var urlParams = new URLSearchParams(querystring[1]);
 
             if (urlParams.has(obj))
             {
@@ -81,16 +81,18 @@ self.addEventListener('fetch', function(event) {
               {
                 translatedparams = translatedparams +'&';
               }
-              translatedparams = translatedparams + obj + '='+value;
+              translatedparams = translatedparams + translatorJson[obj] + '='+value;
             }
           }
+          console.log('new params',translatedparams);
+          console.log('translated url', querystring[0] + translatedparams);
+
         }
          // var newResponse = new Response('<html><body><p>This is a response that comes from your service worker! '+ event.request.url +  translatedparams  + '</p></body></html>', {
          //headers: { 'Content-Type': 'text/html' }
         //});
         let responseClone = response.clone();
 
-        console.log('new params',translatedparams);
         
         caches.open('v1').then(function (cache) {
           cache.put(event.request, responseClone);
