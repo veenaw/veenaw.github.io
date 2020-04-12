@@ -68,7 +68,8 @@ self.addEventListener('fetch', function(event) {
           for (obj in translatorJson)
           {
             value = '';
-            var urlParams = new URLSearchParams(event.request.url);
+            var querystring =  event.request.url.split("?");
+            var urlParams = new URLSearchParams(querystring[1]);
 
             if (urlParams.has(obj))
             {
@@ -76,7 +77,11 @@ self.addEventListener('fetch', function(event) {
             }
             if (value != '')
             {
-              translatedparams += obj + '='+value;
+              if translatedparams!= ''
+              {
+                translatedparams = translatedparams +'&';
+              }
+              translatedparams = translatedparams + obj + '='+value;
             }
           }
         }
