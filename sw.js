@@ -77,7 +77,7 @@ self.addEventListener('fetch', function(event) {
             }
             if (value != '')
             {
-              if translatedparams!= ''
+              if (translatedparams != '')
               {
                 translatedparams = translatedparams +'&';
               }
