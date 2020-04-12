@@ -15,7 +15,7 @@ if ('serviceWorker' in navigator) {
     userVisibleOnly : true
   }).then(function(sub)
   {
-    console.log('endpoint': sub.endpoint);
+    console.log('endpoint:', sub.endpoint);
   });
 
 
