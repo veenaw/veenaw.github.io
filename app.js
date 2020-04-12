@@ -33,6 +33,8 @@ function loadAllImages(isfirstload)
   }
 
   for(var i = 0; i< toadd; i++) {
+    fetchImage(url);
+    /*
     imgLoad(url).then(function(arrayResponse) {
 
       var myImage = document.createElement('img');
@@ -51,7 +53,7 @@ function loadAllImages(isfirstload)
 
     }, function(Error) {
       console.log(Error);
-    });
+    });*/
   }
 }
 
@@ -63,6 +65,29 @@ function addImage()
   loadAllImages(false);
 
 };
+
+
+function readResponseAsBlob(response) {
+  return response.blob();
+}
+
+function showImage(responseAsBlob) {
+  // Assuming the DOM has a div with id 'container'
+  var container = document.getElementById('section');
+  var imgElem = document.createElement('img');
+  container.appendChild(imgElem);
+  var imgUrl = URL.createObjectURL(responseAsBlob);
+  imgElem.src = imgUrl;
+}
+
+function fetchImage(pathToResource) {
+  fetch(pathToResource)
+  .then(validateResponse)
+  .then(readResponseAsBlob)
+  .then(showImage)
+  .catch(logError);
+}
+
 
 /*
 
