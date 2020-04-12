@@ -85,7 +85,7 @@ self.addEventListener('fetch', function(event) {
             }
           }
           console.log('new params',translatedparams);
-          console.log('translated url', querystring[0] + translatedparams);
+          console.log('translated url', querystring[0] + '?' +translatedparams);
 
         }
          // var newResponse = new Response('<html><body><p>This is a response that comes from your service worker! '+ event.request.url +  translatedparams  + '</p></body></html>', {
