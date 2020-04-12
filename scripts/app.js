@@ -46,7 +46,7 @@ if ('serviceWorker' in navigator) {
 var maximages = 5;
 var prevmaximamges = maximages;
 var path = 'images/'
-var url  = '/veenaw.github.io/images/image.jpeg/?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1'
+var url  = 'images/image.jpeg/?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1'
   
 
 function loadAllImages(isfirstload)
