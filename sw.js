@@ -44,13 +44,7 @@ self.addEventListener('fetch', function(event) {
     if (response !== undefined) {
       return response;
     } else {
-
-      return fetch(event.request).then(function (response) {
-        // response may be used only once
-        // we need to save clone to put one copy in cache
-        // and serve second one
-        //const url = new URL(event.request.clone().url);
-        //var paramValue = url.searchParams.get("filename");
+        
         var translatorJson = 
         {
           'interaction': 'event',
@@ -85,15 +79,15 @@ self.addEventListener('fetch', function(event) {
             }
           }
           console.log('new params',translatedparams);
-          console.log('translated url', querystring[0] + '?' +translatedparams);
-
+          var newUrl = querystring[0] + '?' +translatedparams;
+          console.log('translated url', newUrl);
+          event.request.url = newUrl;
         }
-         // var newResponse = new Response('<html><body><p>This is a response that comes from your service worker! '+ event.request.url +  translatedparams  + '</p></body></html>', {
-         //headers: { 'Content-Type': 'text/html' }
-        //});
-        let responseClone = response.clone();
-
-        
+      return fetch(event.request).then(function (response) {
+        // response may be used only once
+        // we need to save clone to put one copy in cache
+        // and serve second one
+        let responseClone = response.clone();     
         caches.open('v1').then(function (cache) {
           cache.put(event.request, responseClone);
         });
