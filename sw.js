@@ -1,18 +1,38 @@
+// A list of local resources we always want to be cached
+const PRECACHE = 'v1';
+const RUNTIME = 'runtime';
+
+
+const PRECACHE_URLS = [
+'/veenaw.github.io/',
+'/veenaw.github.io/index.html',
+'/veenaw.github.io/style.css',
+'/veenaw.github.io/app.js',
+'/veenaw.github.io/images/image.jpeg'
+];
+
+
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('v1').then(function(cache) {
-      return cache.addAll([
-        '/veenaw.github.io/',
-        '/veenaw.github.io/index.html',
-        '/veenaw.github.io/style.css',
-        '/veenaw.github.io/app.js',
-        '/veenaw.github.io/images/image.jpeg'
-      ]);
+    caches.open(PRECACHE).then(function(cache) {
+      return cache.addAll(PRECACHE_URLS).then(self.skipWaiting());
     })
   );
 });
 
-self.addEventListener('activate', () => self.clients.claim());
+// The activate handler takes care of cleaning up old caches.
+self.addEventListener('activate', event => {
+  const currentCaches = [PRECACHE, RUNTIME];
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    }).then(cachesToDelete => {
+      return Promise.all(cachesToDelete.map(cacheToDelete => {
+        return caches.delete(cacheToDelete);
+      }));
+    }).then(() => self.clients.claim())
+  );
+});
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(caches.match(event.request).then(function(response) {
