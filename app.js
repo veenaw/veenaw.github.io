@@ -22,66 +22,6 @@ var path = 'images/'
 var url  = 'images/image.jpeg?interaction=UserClick&client=ad_media&os_name=macos&x1=google&x2=email&x3=pdfconvert&landing_url=abcd1'
   
 
-
-// function for loading each image via XHR
-function addImage()
-{
-  prevmaximamges = maximages;
-  maximages = maximages + 1;
-  loadAllImages(false);
-
-};
-
-
-function imgLoad(imgurl) {
-  // return a promise for an image loading
-// download as Blob object
-  return new Promise(function(resolve, reject) {
-    fetch(imgurl).then((response) => {
-      if(response.status == 200)
-      {
-        var arrayResponse = [];
-        arrayResponse[0] = response.blob();
-        arrayResponse[1] = imgurl;
-        resolve(arrayResponse);
-      } else {
-        reject(Error('Image didn\'t load successfully; error code:' + response.statusText));
-      }
-      })
-  });
-}
-
-// function for loading each image via XHR
-/*
-function imgLoad(imgurl) {
-  // return a promise for an image loading
-  return new Promise(function(resolve, reject) {
-    var request = new XMLHttpRequest();
-    request.open('GET', imgurl);
-    request.responseType = 'blob';
-
-
-
-    request.onload = function() {
-      if (request.status == 200) {
-        var arrayResponse = [];
-        arrayResponse[0] = request.response;
-        arrayResponse[1] = imgurl;
-        resolve(arrayResponse);
-      } else {
-        reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
-      }
-    };
-
-    request.onerror = function() {
-      reject(Error('There was a network error.'));
-    };
-
-    // Send the request
-    request.send();
-  });
-}*/
-
 function loadAllImages(isfirstload)
 {
   var imgSection = document.querySelector('section');
@@ -114,6 +54,66 @@ function loadAllImages(isfirstload)
     });
   }
 }
+
+// function for loading each image via XHR
+function addImage()
+{
+  prevmaximamges = maximages;
+  maximages = maximages + 1;
+  loadAllImages(false);
+
+};
+
+/*
+
+function imgLoad(imgurl) {
+  // return a promise for an image loading
+// download as Blob object
+  return new Promise(function(resolve, reject) {
+    fetch(imgurl).then((response) => {
+      if(response.status == 200)
+      {
+        var arrayResponse = [];
+        arrayResponse[0] = response.blob();
+        arrayResponse[1] = imgurl;
+        resolve(arrayResponse);
+      } else {
+        reject(Error('Image didn\'t load successfully; error code:' + response.statusText));
+      }
+      })
+  });
+}*/
+
+// function for loading each image via XHR
+
+function imgLoad(imgurl) {
+  // return a promise for an image loading
+  return new Promise(function(resolve, reject) {
+    var request = new XMLHttpRequest();
+    request.open('GET', imgurl);
+    request.responseType = 'blob';
+
+    request.onload = function() {
+      if (request.status == 200) {
+        var arrayResponse = [];
+        arrayResponse[0] = request.response;
+        arrayResponse[1] = imgurl;
+        resolve(arrayResponse);
+      } else {
+        reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
+      }
+    };
+
+    request.onerror = function() {
+      reject(Error('There was a network error.'));
+    };
+
+    // Send the request
+    request.send();
+  });
+}
+
+
 
 window.onload = function() {
   loadAllImages(true);
