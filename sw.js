@@ -4,6 +4,7 @@ const RUNTIME = 'runtime';
 
 
 const PRECACHE_URLS = [
+'/veenaw.github.io'
 '/veenaw.github.io/',
 '/veenaw.github.io/index.html',
 '/veenaw.github.io/style.css',
