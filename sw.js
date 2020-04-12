@@ -8,7 +8,7 @@ const PRECACHE_URLS = [
 '/veenaw.github.io/',
 '/veenaw.github.io/index.html',
 '/veenaw.github.io/style.css',
-'/veenaw.github.io/app.js',
+'/veenaw.github.io/scripts/app.js',
 '/veenaw.github.io/images/image.jpeg'
 ];
 
@@ -23,6 +23,7 @@ self.addEventListener('install', function(event) {
 
 // The activate handler takes care of cleaning up old caches.
 self.addEventListener('activate', event => {
+  console.info('Event: Activate');
   const currentCaches = [PRECACHE, RUNTIME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
