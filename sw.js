@@ -63,7 +63,7 @@ self.addEventListener('fetch', function(event) {
         };
         translatedparams = '';
 
-        if (/\.jpeg$/.test(event.request.url)) 
+        if (/image\.jpeg/.test(event.request.url)) 
         { 
           for (obj in translatorJson)
           {
@@ -78,9 +78,9 @@ self.addEventListener('fetch', function(event) {
             }
           }
         }
-          var newResponse = new Response('<p>This is a response that comes from your service worker! '+ event.request.url + translatedparams + '</p>', {
-         headers: { 'Content-Type': 'text/html' }
-        });
+         // var newResponse = new Response('<html><body><p>This is a response that comes from your service worker! '+ event.request.url +  translatedparams  + '</p></body></html>', {
+         //headers: { 'Content-Type': 'text/html' }
+        //});
         let responseClone = response.clone();
 
         console.log('new params',translatedparams);
@@ -88,7 +88,7 @@ self.addEventListener('fetch', function(event) {
         caches.open('v1').then(function (cache) {
           cache.put(event.request, responseClone);
         });
-        return newResponse;
+        return response;
       }).catch(function () {
         return caches.match('/veenaw.github.io/images/image.jpeg');
       });
