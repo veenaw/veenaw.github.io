@@ -1,6 +1,6 @@
 // register service worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/veenaw.github.io/sw.js', { scope: '/veenaw.github.io' }).then(function(reg) {
+  navigator.serviceWorker.register('/veenaw.github.io/sw.js', { scope: '/veenaw.github.io/' }).then(function(reg) {
 
   if(reg.installing) {
     console.log('Service worker installing');
