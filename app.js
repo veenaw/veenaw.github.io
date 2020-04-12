@@ -2,13 +2,20 @@
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/veenaw.github.io/sw.js', { scope: '/veenaw.github.io/' }).then(function(reg) {
 
-    if(reg.installing) {
-      console.log('Service worker installing');
-    } else if(reg.waiting) {
-      console.log('Service worker installed');
-    } else if(reg.active) {
-      console.log('Service worker active');
-    }
+  if(reg.installing) {
+    console.log('Service worker installing');
+  } else if(reg.waiting) {
+    console.log('Service worker installed');
+  } else if(reg.active) {
+    console.log('Service worker active');
+  }
+
+  // Do a one-off check to see if a service worker's in control.
+  if (navigator.serviceWorker.controller) {
+    console.log(`This page is currently controlled by: ${navigator.serviceWorker.controller}`);
+  } else {
+    console.log('This page is not currently controlled by a service worker.');
+  }
 
   }).catch(function(error) {
     // registration failed
@@ -102,7 +109,7 @@ function validateResponse(response) {
   }
   return response;
 }
-  
+
 
 
 /*
