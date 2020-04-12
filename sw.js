@@ -68,9 +68,11 @@ self.addEventListener('fetch', function(event) {
           for (obj in translatorJson)
           {
             value = '';
-            if (event.request.url.searchParams.get(obj))
+            var urlParams = new URLSearchParams(event.request.url);
+
+            if (urlParams.has(obj))
             {
-              value = event.request.url.searchParams.get(obj);
+              value = urlParams.get(obj);
             }
             if (value != '')
             {
