@@ -81,14 +81,14 @@ self.addEventListener('fetch', function(event) {
           var newResponse = new Response('<p>This is a response that comes from your service worker! '+ event.request.url + translatedparams + '</p>', {
          headers: { 'Content-Type': 'text/html' }
         });
-        console.log("new params" ,translatedparams);
+        let responseClone = response.clone();
 
-        let responseClone = newResponse.clone();
+        console.log('new params',translatedparams);
         
         caches.open('v1').then(function (cache) {
           cache.put(event.request, responseClone);
         });
-        return responseClone;
+        return newResponse;
       }).catch(function () {
         return caches.match('/veenaw.github.io/images/image.jpeg');
       });
