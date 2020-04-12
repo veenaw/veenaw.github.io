@@ -10,17 +10,28 @@ if ('serviceWorker' in navigator) {
     console.log('Service worker active');
   }
 
-  // Do a one-off check to see if a service worker's in control.
+    reg.pushManager.subscribe(
+    {
+      userVisibleOnly : true
+    }).then(function(sub)
+    {
+      console.log('endpoint': sub.endpoint);
+    }
+  )
+
+
+  }).catch(function(error) {
+    // registration failed
+    console.log('Registration failed with ' + error);
+  });
+
+    // Do a one-off check to see if a service worker's in control.
   if (navigator.serviceWorker.controller) {
     console.log(`This page is currently controlled by: ${navigator.serviceWorker.controller}`);
   } else {
     console.log('This page is not currently controlled by a service worker.');
   }
 
-  }).catch(function(error) {
-    // registration failed
-    console.log('Registration failed with ' + error);
-  });
 
   navigator.serviceWorker.ready
   .then(function(registration) {
