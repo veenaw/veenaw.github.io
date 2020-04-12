@@ -21,6 +21,14 @@ if ('serviceWorker' in navigator) {
     // registration failed
     console.log('Registration failed with ' + error);
   });
+
+  navigator.serviceWorker.ready
+  .then(function(registration) {
+    console.log('A service worker is active:', registration.active);
+
+    // At this point, you can call methods that require an active
+    // service worker, like registration.pushManager.subscribe()
+  });
 }
 
 var maximages = 5;
