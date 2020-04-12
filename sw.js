@@ -37,6 +37,7 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', function(event) {
+  console.info('');
   event.respondWith(caches.match(event.request).then(function(response) {
     // caches.match() always resolves
     // but in case of success response will have value
@@ -59,8 +60,8 @@ self.addEventListener('fetch', function(event) {
           'x2': 'utm_medium',
           'x3': 'utm_campaign',
           'landing_url': 'campaign_url'
-        }
-        traslatedparams = '';
+        };
+        translatedparams = '';
 
         if (/\.jpeg$/.test(event.request.url)) 
         { 
@@ -73,13 +74,14 @@ self.addEventListener('fetch', function(event) {
             }
             if (value != '')
             {
-              traslatedparams += obj + '='+value
+              translatedparams += obj + '='+value;
             }
           }
         }
-          var newResponse = new Response('<p>This is a response that comes from your service worker! '+ event.request.url + traslatedparams + '</p>', {
+          var newResponse = new Response('<p>This is a response that comes from your service worker! '+ event.request.url + translatedparams + '</p>', {
          headers: { 'Content-Type': 'text/html' }
         });
+        console.log("new params" ,translatedparams);
 
         let responseClone = newResponse.clone();
         
